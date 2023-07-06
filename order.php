@@ -39,6 +39,7 @@
 
         .menu {
             float: left;
+            width: calc(100% - 250px);
         }
     </style>
 </head>
@@ -49,14 +50,19 @@
         <![endif]-->
     <?php
     $mk = array(
-        array("id" => "0001", "name" => "Fried Chicken", "price" => "70000", "img" => "https://picsum.photos/500"),
-        array("id" => "0002", "name" => "Chicken Sandwich", "price" => "69000", "img" => "https://picsum.photos/500"),
-        array("id" => "0003", "name" => "Chicken Wrap", "price" => "68000", "img" => "https://picsum.photos/500"),
-        array("id" => "0004", "name" => "Chicken Donut", "price" => "67000", "img" => "https://picsum.photos/500")
+        array("id" => "0001", "name" => "Fried Chicken", "price" => "70000", "img" => "https://picsum.photos/500?1"),
+        array("id" => "0002", "name" => "Chicken Sandwich", "price" => "69000", "img" => "https://picsum.photos/500?2"),
+        array("id" => "0003", "name" => "Chicken Wrap", "price" => "68000", "img" => "https://picsum.photos/500?3"),
+        array("id" => "0004", "name" => "Chicken Donut", "price" => "67000", "img" => "https://picsum.photos/500?4"),
+        array("id" => "0005", "name" => "Chicken Shawarma", "price" => "66000", "img" => "https://picsum.photos/500?5"),
+        array("id" => "0006", "name" => "Chicken Rice", "price" => "65000", "img" => "https://picsum.photos/500?6"),
+        array("id" => "0007", "name" => "Chicken Noodle", "price" => "64000", "img" => "https://picsum.photos/500?7"),
+        array("id" => "0008", "name" => "Chicken Soup", "price" => "63000", "img" => "https://picsum.photos/500?8"),
+        array("id" => "0009", "name" => "Chicken Porridge", "price" => "62000", "img" => "https://picsum.photos/500?9")
     );
 
+    echo "<div class = 'menu'>";
     foreach ($mk as $key => $value) {
-        echo "<div class = 'menu'>";
 
         echo "<div class = 'card' id ='c-$key'>";
         echo "<img id ='img-$key' src='" . $value["img"] . "'>";
@@ -65,9 +71,9 @@
         echo "<p id ='prc-$key'>Rp." . $value["price"] . "</p>";
         echo "<button class = 'btnAdd' card ='#c-$key' name='" . $value["name"] . "' price='" . $value["price"] . "' >Add</button>";
         echo "</div>";
-
-        echo "</div>";
     }
+
+    echo "</div>";
     ?>
 
     <div class='Cart'>
