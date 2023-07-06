@@ -12,6 +12,14 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
+    <style>
+        .card {
+            border: 1px solid black;
+            width: 250px;
+            margin: 5px;
+            float: left;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,14 +36,14 @@
         <input type="text" id="price_food" name="price_food" placeholder="Price" required>
         <br><br>
 
-        <label for="picture_food">Kode Makanan:</label><br>
+        <label for="picture_food">Foto Makanan:</label><br>
         <input type="file" id="picture_food" name="picture_food" required>
         <br><br>
 
         <input type="submit" name="save" value="Save" style="font-size:20px"> <br><br>
     </form>
     <form method="POST" enctype="multipart/form-data" action="order.php">
-        <input type="submit" name="open-menu" value="Open Menu" style="font-size:20px">
+        <input type="submit" name="open-menu" value="Open Menu" style="font-size:20px"><br><br>
     </form>
 
     <?php
@@ -65,7 +73,7 @@
             echo "The uploaded file is not an image!";
             return;
         }
-    
+
         $destination = "uploads/$file_name.$ext";
         move_uploaded_file($photo['tmp_name'], $destination);
 
@@ -75,10 +83,15 @@
         imagecopyresampled($target, $source, 0, 0, 0, 0, 250, 250, imagesx($source), imagesy($source));
 
         imagepng($target, $destination);
-        echo "<br>";
-        echo "<img src='$destination'>";
 
         $photo_path_food = $destination;
+
+        echo "Menu Added!<br>";
+        echo "<div class = 'card' id ='c-1'>";
+        echo "<img id ='img-1' src='" . $photo_path_food . "'>";
+        echo "<p id ='nam-1'>" . $name_food . "</p>";
+        echo "<p id ='prc-1'>Rp." . $price_food . "</p>";
+        echo "</div>";
 
         $_SESSION['menu'][$code_food] = array(
             "code_food" => $code_food,
