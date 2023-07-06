@@ -32,10 +32,15 @@
         <input type="file" id="picture_food" name="picture_food" required>
         <br><br>
 
-        <input type="submit" name="save" value="Save" style="font-size:20px">
+        <input type="submit" name="save" value="Save" style="font-size:20px"> <br><br>
+    </form>
+    <form method="POST" enctype="multipart/form-data" action="order.php">
+        <input type="submit" name="open-menu" value="Open Menu" style="font-size:20px">
     </form>
 
     <?php
+    session_start();
+
     if (isset($_POST['save'])) {
         $code_food = $_POST['code_food'];
         $name_food = $_POST['name_food'];
@@ -44,13 +49,6 @@
         # Save & Display Image
         $photo = $_FILES['picture_food'];
 
-        // echo $photo['tmp_name'] . "<br>";
-        // echo $photo['name'] . "<br>";
-        // echo $photo['size'] . "<br>";
-        // echo $photo['type'] . "<br>";
-        // echo $photo['error'] . "<br>";
-
-        // $file_name = $photo['name'];
         $file_name = $code_food;
         $ext = pathinfo($photo['name'], PATHINFO_EXTENSION);
 
@@ -67,29 +65,27 @@
             echo "The uploaded file is not an image!";
             return;
         }
-        # Cannot Exceed 10 MB
-        if ($photo['size'] > 10000000) {
-            echo "Please upload file below 10MB";
-            return;
-        }
-        #print_r($info);
     
         $destination = "uploads/$file_name.$ext";
         move_uploaded_file($photo['tmp_name'], $destination);
-    
+
         $source = imagecreatefromstring(file_get_contents($destination));
-        $target = imagecreatetruecolor(500, 500);
-    
-        imagecopyresampled($target, $source, 0, 0, 0, 0, 500, 500, imagesx($source), imagesy($source));
-    
+        $target = imagecreatetruecolor(250, 250);
+
+        imagecopyresampled($target, $source, 0, 0, 0, 0, 250, 250, imagesx($source), imagesy($source));
+
         imagepng($target, $destination);
         echo "<br>";
         echo "<img src='$destination'>";
 
         $photo_path_food = $destination;
 
-        $_SESSION['menu'][$code_food] = array("code_food" => $code_food, "name_food" => $name_food, "price_food" => $price_food, 
-        "photo_path_food" => $photo_path_food);
+        $_SESSION['menu'][$code_food] = array(
+            "code_food" => $code_food,
+            "name_food" => $name_food,
+            "price_food" => $price_food,
+            "photo_path_food" => $photo_path_food
+        );
     }
     ?>
 
