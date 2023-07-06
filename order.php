@@ -31,6 +31,15 @@
             border: 1px solid black;
             height: 500px;
         }
+
+        .Cart {
+            float: right;
+            width: 250px;
+        }
+
+        .menu {
+            float: left;
+        }
     </style>
 </head>
 
@@ -47,18 +56,25 @@
     );
 
     foreach ($mk as $key => $value) {
+        echo "<div class = 'menu'>";
+
         echo "<div class = 'card' id ='c-$key'>";
         echo "<img src='" . $value["img"] . "'>";
         echo "<div id='k-$key'>" . $value["id"] . "</div>";
         echo "<p>" . $value["name"] . "</p>";
         echo "<p>" . $value["price"] . "</p>";
-        echo "<button class = 'btnAdd' card ='#c-$key' kode='#k-$key'>Add</button>";
+        echo "<button class = 'btnAdd' card ='#c-$key'>Add</button>";
+        echo "</div>";
+
         echo "</div>";
     }
     ?>
 
-
-    <script src="js/jquery-3.5.1.min.js"></script>
+    <div class='Cart'>
+        <h2 id='cartlist'>Pilihanku:</h1>
+            <h3 id='cartcontain'></h3>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="js/index.js"></script>
 </body>
 
