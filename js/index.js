@@ -8,7 +8,8 @@ $(".btnAdd").click(function () {
 
     var existingText = $("#cartcontain").text();
     var newText = name + " (Rp." + price + ")";
-    $("#cartcontain").text(existingText + "\n" + newText);
+    $('#cartcontain').append(`<tr>  <td>${name}</td>    <td>(Rp. ${price})</td>   </tr>`);
+
 
     newPrice += price
     $("#carttotal").text("TOTAL (Rp." +newPrice+")");

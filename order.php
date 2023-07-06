@@ -33,43 +33,50 @@
         }
 
         .Cart {
-            float: right;
-            width: 250px;
+            float: left;
+            width: 400px;
+            height: 100%;
+
+            border: 1px solid black;
         }
 
         .menu {
             float: left;
-            width: calc(100% - 250px);
+            width: calc(100% - 400px - 50px);
+            height: 100%;
+            border: 1px solid black;
+
+            margin-right: 10px;
         }
     </style>
 </head>
 
 <body>
-    <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
     <?php
-    $mk = array(
-        array("id" => "0001", "name" => "Fried Chicken", "price" => "70000", "img" => "https://picsum.photos/500?1"),
-        array("id" => "0002", "name" => "Chicken Sandwich", "price" => "69000", "img" => "https://picsum.photos/500?2"),
-        array("id" => "0003", "name" => "Chicken Wrap", "price" => "68000", "img" => "https://picsum.photos/500?3"),
-        array("id" => "0004", "name" => "Chicken Donut", "price" => "67000", "img" => "https://picsum.photos/500?4"),
-        array("id" => "0005", "name" => "Chicken Shawarma", "price" => "66000", "img" => "https://picsum.photos/500?5"),
-        array("id" => "0006", "name" => "Chicken Rice", "price" => "65000", "img" => "https://picsum.photos/500?6"),
-        array("id" => "0007", "name" => "Chicken Noodle", "price" => "64000", "img" => "https://picsum.photos/500?7"),
-        array("id" => "0008", "name" => "Chicken Soup", "price" => "63000", "img" => "https://picsum.photos/500?8"),
-        array("id" => "0009", "name" => "Chicken Porridge", "price" => "62000", "img" => "https://picsum.photos/500?9")
-    );
+    session_start();
 
     echo "<div class = 'menu'>";
-    foreach ($mk as $key => $value) {
+
+    if(isset($_SESSION["menu"])){
+        $menu = $_SESSION["menu"];
+
+    }
+    else{
+        $menu = array();
+        echo "<p>Menu is Empty</p>";
+
+        echo '<form method="POST" enctype="multipart/form-data" action="index.php">';
+        echo '<input type="submit" name="add-menu" value="Add Menu" style="font-size:20px">    </form>';
+    }
+    
+
+    foreach ($menu as $key => $value) {
 
         echo "<div class = 'card' id ='c-$key'>";
-        echo "<img id ='img-$key' src='" . $value["img"] . "'>";
-        echo "<div id='k-$key'>" . $value["id"] . "</div>";
-        echo "<p id ='nam-$key'>" . $value["name"] . "</p>";
-        echo "<p id ='prc-$key'>Rp." . $value["price"] . "</p>";
-        echo "<button class = 'btnAdd' card ='#c-$key' name='" . $value["name"] . "' price='" . $value["price"] . "' >Add</button>";
+        echo "<img id ='img-$key' src='" . $value["photo_path_food"] . "'>";
+        echo "<p id ='nam-$key'>" . $value["name_food"] . "</p>";
+        echo "<p id ='prc-$key'>Rp." . $value["price_food"] . "</p>";
+        echo "<button class = 'btnAdd' card ='#c-$key' name='" . $value["name_food"] . "' price='" . $value["price_food"] . "' >Add</button>";
         echo "</div>";
     }
 
@@ -78,7 +85,7 @@
 
     <div class='Cart'>
         <h2 id='cartlist'>Pilihanku:</h1>
-            <h3 id='cartcontain'></h3>
+            <table id='cartcontain'></table>
             <br></br>
             <h3 id='carttotal'></h3>
 
