@@ -59,11 +59,11 @@
         echo "<div class = 'menu'>";
 
         echo "<div class = 'card' id ='c-$key'>";
-        echo "<img src='" . $value["img"] . "'>";
+        echo "<img id ='img-$key' src='" . $value["img"] . "'>";
         echo "<div id='k-$key'>" . $value["id"] . "</div>";
-        echo "<p>" . $value["name"] . "</p>";
-        echo "<p>" . $value["price"] . "</p>";
-        echo "<button class = 'btnAdd' card ='#c-$key'>Add</button>";
+        echo "<p id ='nam-$key'>" . $value["name"] . "</p>";
+        echo "<p id ='prc-$key'>Rp." . $value["price"] . "</p>";
+        echo "<button class = 'btnAdd' card ='#c-$key' name='" . $value["name"] . "' price='" . $value["price"] . "' >Add</button>";
         echo "</div>";
 
         echo "</div>";
@@ -73,6 +73,9 @@
     <div class='Cart'>
         <h2 id='cartlist'>Pilihanku:</h1>
             <h3 id='cartcontain'></h3>
+            <br></br>
+            <h3 id='carttotal'></h3>
+
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="js/index.js"></script>
